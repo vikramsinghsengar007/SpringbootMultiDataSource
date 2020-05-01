@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {
+      "name": "second.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "net.codejava.SecondaryDBConfig",
+      "sourceMethod": "public javax.sql.DataSource dataSource() throws java.sql.SQLException"
+    },
+    {
+      "name": "spring.datasource",
+      "type": "javax.sql.DataSource",
+      "sourceType": "net.codejava.PrimaryDBConfig",
+      "sourceMethod": "public javax.sql.DataSource dataSource() throws java.sql.SQLException"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.datasource.jdbc-url",
+      "type": "java.lang.String",
+      "description": "A description for 'spring.datasource.jdbc-url'"
+    }
+  ],
+  "hints": []
+}

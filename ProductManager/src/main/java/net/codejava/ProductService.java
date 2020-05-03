@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ProductService {
 
 	@Autowired
 	private PrimaryRepository primaryRepo;
 	@Autowired
 	private SecondaryRepository secondaryRepo;
+	
 	
 	  @Autowired
 	  ProductService(PrimaryRepository primaryRepo, SecondaryRepository secondaryRepo) {
@@ -24,6 +26,10 @@ public class ProductService {
 	public List<SecondProduct> listAll() {
 		return secondaryRepo.findAll();
 	}
+	  @Transactional(transactionManager="transactionManager")
+		public List<Product> listAllPrimary() {
+			return  primaryRepo.findAll();
+		}
 	  @Transactional(transactionManager="SecondaryTransactionManager")
 	public void save(SecondProduct product) {
 		secondaryRepo.save(product);
@@ -37,4 +43,12 @@ public class ProductService {
 		//primaryRepo.deleteById(id);
 		secondaryRepo.deleteById(id);
 	}
+	  
+	  @Transactional(value="chainedTransactionManager")
+		public List<AllProducts> listFromAllDB() {
+		  List l2 =  primaryRepo.findAll();
+			List l1 =  secondaryRepo.findAll();
+			l1.addAll(l2);
+			return l1;
+		}
 }

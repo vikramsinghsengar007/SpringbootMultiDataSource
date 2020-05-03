@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-  entityManagerFactoryRef = "primaryEntityManagerFactory",
+  entityManagerFactoryRef = "entityManagerFactory",
   basePackages = { "net.codejava" }
 )
 public class PrimaryDBConfig {
@@ -35,7 +35,7 @@ public class PrimaryDBConfig {
 	@Autowired
 	Environment env;
 	 @Primary
-	  @Bean(name = "primaryDataSource")
+	  @Bean(name = "dataSource")
 	  @ConfigurationProperties(prefix = "spring.datasource")
 	  public DataSource dataSource() throws SQLException {
 		  DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -43,19 +43,19 @@ public class PrimaryDBConfig {
 		    dataSource.setUrl(env.getProperty("spring.datasource.jdbc-url"));
 		    dataSource.setUsername(env.getProperty("spring.datasource.username"));
 		    dataSource.setPassword(env.getProperty("spring.datasource.password"));
-	    DataSource dataSourc=  DataSourceBuilder.create().build();
-	    try (Connection connection = dataSource.getConnection()) {
-	        System.out.println("catalog:" + connection.getCatalog());
-	    }
+		    DataSource dataSourc=  DataSourceBuilder.create().build();
+		    try (Connection connection = dataSource.getConnection()) {
+		        System.out.println("catalog:" + connection.getCatalog());
+		    }
 	    return dataSourc;
 	  }
 	  
 	  @Primary
-	  @Bean(name = "primaryEntityManagerFactory")
+	  @Bean(name = "entityManagerFactory")
 	  public LocalContainerEntityManagerFactoryBean 
-	  primaryEntityManagerFactory(
+	 entityManagerFactory(
 	    EntityManagerFactoryBuilder builder,
-	    @Qualifier("primaryDataSource") DataSource dataSource
+	    @Qualifier("dataSource") DataSource dataSource
 	  ) {
 	    return builder
 	      .dataSource(dataSource)
@@ -67,10 +67,10 @@ public class PrimaryDBConfig {
 	  @Primary
 	  @Bean(name = "transactionManager")
 	  public PlatformTransactionManager transactionManager(
-	    @Qualifier("primaryEntityManagerFactory") EntityManagerFactory 
-	    primaryEntityManagerFactory
+	    @Qualifier("entityManagerFactory") EntityManagerFactory 
+	    entityManagerFactory
 	  ) {
-	    return new JpaTransactionManager(primaryEntityManagerFactory);
+	    return new JpaTransactionManager(entityManagerFactory);
 	  }
 
 }

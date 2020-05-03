@@ -20,7 +20,9 @@ public class AppController {
 	
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
-		List<SecondProduct> listProducts = service.listAll();
+//		List<SecondProduct> listProducts = service.listAll();
+		List<Product> listProducts = service.listAllPrimary();
+		//List<AllProducts> listProducts = service.listFromAllDB();
 		model.addAttribute("listProducts", listProducts);
 		
 		return "index";

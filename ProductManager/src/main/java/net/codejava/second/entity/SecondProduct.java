@@ -1,4 +1,4 @@
-package net.codejava;
+package net.codejava.second.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ public class SecondProduct {
 	private String madein;
 	private float price;
 
-	protected SecondProduct() {
+	public SecondProduct() {
 	}
 
 	protected SecondProduct(Long id, String name, String brand, String madein, float price) {

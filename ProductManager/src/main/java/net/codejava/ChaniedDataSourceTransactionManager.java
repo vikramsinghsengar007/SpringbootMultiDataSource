@@ -24,8 +24,8 @@ public class ChaniedDataSourceTransactionManager{
 	 */
 	 @Bean(name = "chainedTransactionManager")
 	    public ChainedTransactionManager transactionManager(
-	    		@Qualifier("transactionManager") PlatformTransactionManager ds1,
-	            @Qualifier("SecondaryTransactionManager") PlatformTransactionManager ds2) {
+	    		@Qualifier("firstTransactionManager") PlatformTransactionManager ds1,
+	            @Qualifier("secondTransactionManager") PlatformTransactionManager ds2) {
 	         return new ChainedTransactionManager(ds1, ds2);
 	    }
 }

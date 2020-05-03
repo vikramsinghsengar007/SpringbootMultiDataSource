@@ -1,22 +1,16 @@
-package net.codejava;
+package net.codejava.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class AllProducts {
+public class AllProductsDTO {
 	private Long id;
 	private String name;
 	private String brand;
 	private String madein;
 	private float price;
 
-	protected AllProducts() {
+	protected AllProductsDTO() {
 	}
 
-	protected AllProducts(Long id, String name, String brand, String madein, float price) {
+	protected AllProductsDTO(Long id, String name, String brand, String madein, float price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -25,8 +19,6 @@ public class AllProducts {
 		this.price = price;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}

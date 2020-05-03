@@ -3,14 +3,14 @@
     {
       "name": "second.datasource",
       "type": "javax.sql.DataSource",
-      "sourceType": "net.codejava.SecondaryDBConfig",
-      "sourceMethod": "public javax.sql.DataSource dataSource() throws java.sql.SQLException"
+      "sourceType": "net.codejava.second.config.SecondaryDBConfig",
+      "sourceMethod": "public javax.sql.DataSource dataSource() "
     },
     {
       "name": "spring.datasource",
       "type": "javax.sql.DataSource",
-      "sourceType": "net.codejava.PrimaryDBConfig",
-      "sourceMethod": "public javax.sql.DataSource dataSource() throws java.sql.SQLException"
+      "sourceType": "net.codejava.first.config.PrimaryDBConfig",
+      "sourceMethod": "public javax.sql.DataSource firstDataSource() "
     }
   ],
   "properties": [
